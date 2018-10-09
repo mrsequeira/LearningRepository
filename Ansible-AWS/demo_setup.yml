@@ -1,11 +1,11 @@
 # demo_setup.yml
-# To execute: ansible-playbook demo_setup.yml
+# How to execute: ansible-playbook demo_setup.yml
 # Ref: https://docs.ansible.com/ansible/2.6/scenario_guides/guide_aws.html
 
 - hosts: localhost
   connection: local
   gather_facts: False
-  #Best pratice: Insert into a vars file
+  #Best pratice: Insert this into a vars_file
   vars:
     keypair: ubuntu18.04
     instance_type: t2.micro
