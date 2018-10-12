@@ -38,12 +38,16 @@ docker port container-name <port>
 FROM <container-name:tag>
 COPY <src> <dest>
 EXPOSE <port>
+RUN <command> #we can execute commands as if they're running from a command shell
+WORKDIR <directory>
 
 CMD ["example", "-a", "finish this;"]#If the command requires arguments then it's recommended to use an array
 ``` 
 ## Turning dockerfile into an image
 ```bash
 docker build -t <name-image:tag> <build-directory> #use tags to reference a version number, 
+    #options
+    -no-cache=true #don't want to use the cache as part of the build 
 ``` 
 
 ## ex

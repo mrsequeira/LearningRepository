@@ -1,0 +1,12 @@
+# Dockerfile for deploying Node.js applications (express)
+FROM node:10-alpine
+RUN mkdir -p /src/app
+WORKDIR /src/app
+COPY package.json /src/app/package.json
+
+RUN npm install
+
+COPY . /src/app
+EXPOSE 3000
+CMD [ "npm", "start" ]
+#RUN npm start (Check README.md t understand, why you cant use this)
