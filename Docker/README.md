@@ -13,11 +13,12 @@ docker ps #Show activated images and more info
 docker ps -a #Show activated and desactivated images
 docker stop container-id 
 docker run -it ubuntu #Acess to terminal inside container(foreground mode, allocating pseudo-tty)
-    #Options
+    #Options(most used)
     -v <host-dir>:<container-dir> #Persisting Data
     -d  # Detached mode
     --name <NAME> #run and give a new name VERIFY
     -p <specific-port>:<specific-port> <container-name|container-id> # Run image to specified port and name
+    -e NODE_ENV=production
 
 sudo docker commit -m "message" -a "Author" 996cc7227002 finid/ubuntu-nodejs #Save image after doing changes
 docker login -u mrsequeira
@@ -38,16 +39,24 @@ docker port container-name <port>
 FROM <container-name:tag>
 COPY <src> <dest>
 EXPOSE <port>
+CMD ["example", "-a", "finish this;"]#If the command requires arguments then it's recommended to use an array
 RUN <command> #we can execute commands as if they're running from a command shell
 WORKDIR <directory>
-
-CMD ["example", "-a", "finish this;"]#If the command requires arguments then it's recommended to use an array
+ONBUILD <RUN|COPY|etc> <xxx> #Executes after the built of the image
 ``` 
-## Turning dockerfile into an image
+* Diferences between RUN and CMD
+Are you building dependencies into your image? Use RUN.
+Are you launching / running your Dockerized process? Use CMD.
+If you want a deepier understand: 
+https://nickjanetakis.com/blog/docker-tip-36-the-difference-between-run-and-cmd-in-a-dockerfile
+https://stackoverflow.com/questions/37461868/whats-the-difference-between-run-and-cmd-in-a-docker-file-and-when-should-i-use
+
+### Turning dockerfile into an image
 ```bash
 docker build -t <name-image:tag> <build-directory> #use tags to reference a version number, 
     #options
     -no-cache=true #don't want to use the cache as part of the build 
+    -f # specify different location of dockerfile
 ``` 
 
 ## ex
